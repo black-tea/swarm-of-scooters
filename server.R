@@ -28,7 +28,8 @@ getDocklessDevices <- function (providerName) {
                 'lime' = 'https://lime.bike/api/partners/v1/gbfs/los_angeles/free_bike_status.json',
                 'lyft' = 'https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json',
                 'jump' = 'https://la.jumpbikes.com/opendata/free_bike_status.json',
-                'spin' = 'https://staging.spin.pm/api/gbfs/v1/los_angeles/free_bike_status')
+                'spin' = 'https://staging.spin.pm/api/gbfs/v1/los_angeles/free_bike_status',
+                'razor' = 'url')
   r <- GET(url)
   df <- jsonlite::fromJSON(content(r, as='text'), flatten=TRUE)
   rdf <- df$data$bikes
@@ -88,19 +89,17 @@ server <- function(input, output) {
   })
   # Refresh Fetch
   observeEvent(input$download, {allbikes()})
-  # Filter by Company
+  
+  # Filter bikes by Company
   filteredBikes <- reactive({
     bikes <- allbikes() %>%
       filter(provider %in% input$providerGroup)})
 
-  
   neighborhoodCt <- reactive({
-    
     ct <- filteredBikes() %>%
       st_join(neighborhoods, join=st_within, left=FALSE) %>%
       count(Name) %>%
       st_set_geometry(NULL)
-    
     neighborhoodCt <- neighborhoods %>%
       left_join(ct, by='Name') %>%
       select(-Descriptio) %>%
@@ -108,7 +107,6 @@ server <- function(input, output) {
       mutate(area = st_area(.)) %>%
       mutate(area = units::set_units(st_area(.), mi^2)) %>%
       mutate(density = n/area)
-    
     return(neighborhoodCt)
   })
   
@@ -129,7 +127,7 @@ server <- function(input, output) {
   observe( {
     bikes <- filteredBikes()
     if(length(bikes) > 1){
-      pal <- colorFactor(c('#24D000', 'red', 'purple','#5DBCD2','black'),
+      pal <- colorFactor(c('#24D000', 'red', '#fcce24','#5DBCD2','black'),
                        domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
                        ordered=TRUE)
       leafletProxy("map") %>%
@@ -179,6 +177,8 @@ server <- function(input, output) {
           #addPolygons(data=cityBoundary, fill=FALSE, color='#444444', weight=2, group="Bounday")
       
       } else {
+        bikes <- filteredBikes()
+        print(nrow(bikes))
         leafletProxy("map") %>%
           clearShapes() %>%
           showGroup("Devices")}
