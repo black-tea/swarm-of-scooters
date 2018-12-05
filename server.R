@@ -29,12 +29,13 @@ getDocklessDevices <- function (providerName) {
                 'lyft' = 'https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json',
                 'jump' = 'https://la.jumpbikes.com/opendata/free_bike_status.json',
                 'spin' = 'https://staging.spin.pm/api/gbfs/v1/los_angeles/free_bike_status',
-                'razor' = 'url')
+                'razor' = 'url',
+                'wheels' = 'https://la-gbfs.getwheelsapp.com/free_bike_status.json')
   r <- GET(url)
   df <- jsonlite::fromJSON(content(r, as='text'), flatten=TRUE)
   rdf <- df$data$bikes
   
-  # Support for paginated endpoints
+  # Support for paginated endpoints (lime)
   if(!is.null(df$max_page)){
     
     lastpg <- df$max_page
@@ -81,10 +82,7 @@ server <- function(input, output) {
         getDocklessDevices(x);
       })
     })
-
-    # allbikes <- lapply()
     allbikes <- do.call('rbind', allbikes)
-    #allbikes <- allbikes[cityBoundary,] # Filter w/in LA City
     return(allbikes)
   })
   # Refresh Fetch
@@ -127,7 +125,7 @@ server <- function(input, output) {
   observe( {
     bikes <- filteredBikes()
     if(length(bikes) > 1){
-      pal <- colorFactor(c('#24D000', 'red', '#fcce24','#5DBCD2','black'),
+      pal <- colorFactor(c('#24D000', 'red', '#f36396','#5DBCD2','#FF5503'),
                        domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
                        ordered=TRUE)
       leafletProxy("map") %>%
