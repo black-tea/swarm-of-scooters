@@ -3,7 +3,6 @@
 #######################
 
 library(leaflet)
-library(shinyWidgets)
 library(shinydashboard)
 
 providerNames <- c('Bird','HOPR','JUMP','Lime','Lyft','Razor')

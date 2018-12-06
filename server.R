@@ -51,22 +51,23 @@ getDocklessDevices <- function (providerName) {
     rdf <- rbindlist(dflist)
     rdf <- rdf %>% mutate(lon = as.double(lon), lat = as.double(lat))
   }
-  
-  # Format to sf df
-  bikes <- rdf %>%
-    st_as_sf(coords = c('lon','lat')) %>%
-    mutate(provider = providerName) %>%
-    select(provider, bike_id) %>%
-    st_set_crs(4326)
-  
-  return(bikes)
+
+  # Format to sf df if data present
+  if(is.data.frame(rdf)){
+    bikes <- rdf %>%
+      st_as_sf(coords = c('lon','lat')) %>%
+      mutate(provider = providerName) %>%
+      select(provider, bike_id) %>%
+      st_set_crs(4326)
+    return(bikes)
+    }
 }
 
 ### Load Data
 neighborhoods <- st_read('data/la_neighborhoods/la_city.shp')
 cityBoundary <- neighborhoods %>% mutate(city = 'Los Angeles') %>% group_by(city) %>% summarize(do_union=TRUE)
 names(cityBoundary$geometry) <- NULL
-providerlist <- c('lyft','jump','lime','cyclehop','bird')
+providerlist <- c('jump','lime','cyclehop','bird','lyft')
 
 ### Server
 server <- function(input, output) {
@@ -125,7 +126,7 @@ server <- function(input, output) {
   observe( {
     bikes <- filteredBikes()
     if(length(bikes) > 1){
-      pal <- colorFactor(c('#24D000', 'red', '#f36396','#5DBCD2','#FF5503'),
+      pal <- colorFactor(c('#24D000', 'red', '#f36396','#5DBCD2','black'),
                        domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
                        ordered=TRUE)
       leafletProxy("map") %>%
