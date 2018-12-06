@@ -143,12 +143,18 @@ server <- function(input, output) {
   # Add bikes to map
   observe( {
     bikes <- filteredBikes()
-    if(length(bikes) > 1){
+    leafletProxy("map") %>%
+      clearMarkers()
+    
+    if(nrow(bikes) > 1){
+      print('hi')
+      print(bikes)
+      print(nrow(bikes))
       pal <- colorFactor(c('#24D000', 'red', '#f36396','#5DBCD2','black'),
                        domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
                        ordered=TRUE)
       leafletProxy("map") %>%
-        clearMarkers() %>%
+        #clearMarkers() %>%
         addCircleMarkers(data = bikes,
                          radius = 2,
                          weight = 1,
