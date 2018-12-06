@@ -51,9 +51,6 @@ getDocklessDevices <- function (providerName) {
     rdf <- rbindlist(dflist)
     rdf <- rdf %>% mutate(lon = as.double(lon), lat = as.double(lat))
   }
-  print(providerName)
-  print(rdf)
-  
 
   # format data, if exists
   if(is.data.frame(rdf)){
@@ -143,18 +140,23 @@ server <- function(input, output) {
   # Add bikes to map
   observe( {
     bikes <- filteredBikes()
-    leafletProxy("map") %>%
-      clearMarkers()
+    leafletProxy("map") #%>%
+      #clearMarkers()
     
     if(nrow(bikes) > 1){
-      print('hi')
-      print(bikes)
       print(nrow(bikes))
       pal <- colorFactor(c('#24D000', 'red', '#f36396','#5DBCD2','black'),
                        domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
                        ordered=TRUE)
       leafletProxy("map") %>%
-        #clearMarkers() %>%
+        # addCircles(data=bikes,
+        #            radius=15,
+        #            stroke=FALSE,
+        #            fillColor=pal(bikes$provider),
+        #            fillOpacity=1,
+        #            label=bikes$provider,
+        #            group="Devices"
+        # )
         addCircleMarkers(data = bikes,
                          radius = 2,
                          weight = 1,
@@ -199,10 +201,9 @@ server <- function(input, output) {
           #addPolygons(data=cityBoundary, fill=FALSE, color='#444444', weight=2, group="Bounday")
       
       } else {
-        bikes <- filteredBikes()
-        print(nrow(bikes))
         leafletProxy("map") %>%
           clearShapes() %>%
-          showGroup("Devices")}
+          showGroup("Devices")
+        }
     }})
 }
