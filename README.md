@@ -9,13 +9,13 @@ The following table includes the URL for the LA GBFS feed for each provider, as 
 |:--------:|:---------:|:-------:|:-------------------------------------------------------------------------------------- |
 | Bird     | ![bird]   | #000000 | https://mds.bird.co/gbfs/los-angeles/free_bikes                                        |
 | HOPR     | ![hopr]   | #5DBCD2 | https://gbfs.hopr.city/api/gbfs/5/free_bike_status                                       |
-| JUMP     | ![jump]   |         | https://la.jumpbikes.com/opendata/free_bike_status.json                                  |
+| JUMP     | ![jump]   | #F36396 | https://la.jumpbikes.com/opendata/free_bike_status.json                                  |
 | Lime     | ![lime]   | #24D000 | https://lime.bike/api/partners/v1/gbfs/los_angeles/free_bike_status.json                 |
-| Lyft     | ![lyft]   |         | https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json      |
-| Razor    | ![razor]  |         | https://razor-200806.appspot.com/api/v2/gbfs                                             |
-| Skip     | ![skip]   | #fcce24 |                                                                                          |
-| Wind     | ![wind]   |         | https://partners.wind.co/gbfs/los_angeles                                                |
-| Wheels   | ![wheels] |         | https://la-gbfs.getwheelsapp.com/free_bike_status.json                                   | 
+| Lyft     | ![lyft]   | #4F1397 | https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json      |
+| Razor    | ![razor]  | #FF0000 | https://razor-200806.appspot.com/api/v2/gbfs                                             |
+| Skip     | ![skip]   | #FCCE24 |                                                                                          |
+| Wheels   | ![wheels] | #3D4CB7 | https://la-gbfs.getwheelsapp.com/free_bike_status.json                                   | 
+| Wind     | ![wind]   | #5E7C8B | https://partners.wind.co/gbfs/los_angeles                                                |
 
 [bird]: www/bird_circle2.png
 [hopr]: www/hopr_circle.png
