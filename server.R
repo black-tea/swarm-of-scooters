@@ -51,13 +51,30 @@ getDocklessDevices <- function (providerName) {
     rdf <- rbindlist(dflist)
     rdf <- rdf %>% mutate(lon = as.double(lon), lat = as.double(lat))
   }
+  print(providerName)
+  print(rdf)
+  
 
-  # Format to sf df if data present
+  # format data, if exists
   if(is.data.frame(rdf)){
+    
+    # reformat vehicle type
+    if(providerName=='jump'){
+      rdf <- rdf %>% mutate(vehicle_type=if_else(jump_vehicle_type=='bike','ebike', 'scooter'))
+    } else if(providerName=='bird'){
+      rdf <- rdf %>% mutate(vehicle_type='scooter')
+    } else if(providerName=='lime'){
+      print('limeplaceholderlogic')
+    } else if(providerName=='cyclehop'){
+      rdf <- rdf %>% mutate(vehicle_type=if_else(is_ebike==1,'ebike','bike'))
+    }
+    # TODO: add lyft & other providers
+    
+    # format as sf df
     bikes <- rdf %>%
       st_as_sf(coords = c('lon','lat')) %>%
       mutate(provider = providerName) %>%
-      select(provider, bike_id) %>%
+      select(provider, vehicle_type) %>%
       st_set_crs(4326)
     return(bikes)
     }
@@ -92,7 +109,8 @@ server <- function(input, output) {
   # Filter bikes by Company
   filteredBikes <- reactive({
     bikes <- allbikes() %>%
-      filter(provider %in% input$providerGroup)})
+      filter(provider %in% input$providerGroup) %>%
+      filter(vehicle_type %in% input$deviceGroup)})
 
   neighborhoodCt <- reactive({
     ct <- filteredBikes() %>%
@@ -140,7 +158,6 @@ server <- function(input, output) {
                          color = pal(bikes$provider),
                          fillColor = pal(bikes$provider),
                          label = bikes$provider,
-                         popup = bikes$bike_id,
                          group = "Devices")
   }})
   

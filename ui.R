@@ -8,8 +8,8 @@ library(shinydashboard)
 providerNames <- c('Bird','HOPR','JUMP','Lime','Lyft','Razor')
 providerValues <- c('bird','hopr','jump','lime','lyft','razor')
 providerHTML <- lapply(1:length(providerNames), function(x){
-  lblHTML <- '%s<img src="%s_circle.png" height="12" width="12" style="margin: 0px 0px 2px 4px">'
-  return(HTML(sprintf(lblHTML, providerNames[x], providerValues[x])))
+  lblHTML <- '<img src="%s_circle.png" height="12" width="12" style="margin: 0px 4px 2px 0px">%s'
+  return(HTML(sprintf(lblHTML, providerValues[x], providerNames[x])))
 })
 deviceTypes <- list('Scooter'='scooter','E-Bike'='ebike','Bike'='bike')
 names <- c("Lime"='lime',"JUMP"='jump',"Lyft"='lyft',"HOPR"='cyclehop',"Bird"='bird', 'Razor'='razor', 'Skip'='skip')
