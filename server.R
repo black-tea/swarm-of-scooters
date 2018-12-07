@@ -54,18 +54,21 @@ getDocklessDevices <- function (providerName) {
 
   # format data, if exists
   if(is.data.frame(rdf)){
-    
+    print(providerName)
+    print(rdf)
     # reformat vehicle type
     if(providerName=='jump'){
       rdf <- rdf %>% mutate(vehicle_type=if_else(jump_vehicle_type=='bike','ebike', 'scooter'))
-    } else if(providerName=='bird'){
+    } else if(providerName %in% c('bird','wheels','razor','skip','wind')){
       rdf <- rdf %>% mutate(vehicle_type='scooter')
     } else if(providerName=='lime'){
       print('limeplaceholderlogic')
     } else if(providerName=='cyclehop'){
       rdf <- rdf %>% mutate(vehicle_type=if_else(is_ebike==1,'ebike','bike'))
-    }
-    # TODO: add lyft & other providers
+    } else if(providerName=='lyft'){
+      rdf <- rdf %>% mutate(vehicle_type=if_else(type=='electric_scooter','scooter','ebike'))
+    } 
+    # TODO: add SPIN
     
     # format as sf df
     bikes <- rdf %>%
@@ -126,7 +129,6 @@ server <- function(input, output) {
   
   # Map
   output$map <- renderLeaflet({
-    
     map <- leaflet(options(leafletOptions(preferCanvas = TRUE))) %>%
       addProviderTiles(providers$CartoDB.Positron, options = providerTileOptions(
         minZoom=10,
@@ -140,8 +142,7 @@ server <- function(input, output) {
   # Add bikes to map
   observe( {
     bikes <- filteredBikes()
-    leafletProxy("map") #%>%
-      #clearMarkers()
+    leafletProxy("map") 
     
     if(nrow(bikes) > 1){
       print(nrow(bikes))
@@ -149,14 +150,6 @@ server <- function(input, output) {
                        domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
                        ordered=TRUE)
       leafletProxy("map") %>%
-        # addCircles(data=bikes,
-        #            radius=15,
-        #            stroke=FALSE,
-        #            fillColor=pal(bikes$provider),
-        #            fillOpacity=1,
-        #            label=bikes$provider,
-        #            group="Devices"
-        # )
         addCircleMarkers(data = bikes,
                          radius = 2,
                          weight = 1,
