@@ -146,10 +146,11 @@ server <- function(input, output) {
     
     if(nrow(bikes) > 1){
       print(nrow(bikes))
-      pal <- colorFactor(c('#24D000', 'red', '#f36396','#5DBCD2','black'),
+      pal <- colorFactor(c('#24D000', '#F36396', '#4F1397','#5DBCD2','#000000'),
                        domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
                        ordered=TRUE)
       leafletProxy("map") %>%
+        clearMarkers() %>%
         addCircleMarkers(data = bikes,
                          radius = 2,
                          weight = 1,
@@ -162,7 +163,7 @@ server <- function(input, output) {
                          group = "Devices")
   }})
   
-  # Hide markers at high zoom levels  
+  # Change  
   observe({
     if(!is.null(input$map_zoom)){
       if(input$map_zoom < 13){
@@ -177,14 +178,14 @@ server <- function(input, output) {
         
         leafletProxy("map") %>%
           clearShapes() %>%
-          hideGroup("Devices") %>%
+          #hideGroup("Devices") %>%
           #addPolygons(data=cityBoundary, fill=FALSE, color='#444444', weight=2, group="Bounday") %>%
           addPolygons(data = neighborhoodCt,
                       weight = 1,
                       opacity = 1,
                       color = "white",
                       fillColor = ~binpal(density),
-                      fillOpacity = 0.7,
+                      fillOpacity = 0,
                       label = labels,
                       labelOptions = labelOptions(
                         style = list("font-weight" = "normal", padding = "3px 8px"),
