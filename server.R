@@ -142,7 +142,8 @@ server <- function(input, output) {
   # Add bikes to map
   observe( {
     bikes <- filteredBikes()
-    leafletProxy("map") 
+    radius <- ifelse(input$map_zoom<13,1,2)
+    print(input$map_zoom)
     
     if(nrow(bikes) > 1){
       print(nrow(bikes))
@@ -152,12 +153,12 @@ server <- function(input, output) {
       leafletProxy("map") %>%
         clearMarkers() %>%
         addCircleMarkers(data = bikes,
-                         radius = 2,
-                         weight = 1,
-                         stroke = TRUE,
-                         opacity = 1,
+                         radius = radius,
+                         #weight = 1,
+                         stroke = FALSE,
+                         #opacity = 1,
                          fillOpacity = 0.9,
-                         color = pal(bikes$provider),
+                         #color = pal(bikes$provider),
                          fillColor = pal(bikes$provider),
                          label = bikes$provider,
                          group = "Devices")
@@ -181,9 +182,9 @@ server <- function(input, output) {
           #hideGroup("Devices") %>%
           #addPolygons(data=cityBoundary, fill=FALSE, color='#444444', weight=2, group="Bounday") %>%
           addPolygons(data = neighborhoodCt,
-                      weight = 1,
-                      opacity = 1,
-                      color = "white",
+                      weight = 0.1,
+                      opacity = .01,
+                      #color = "white",
                       fillColor = ~binpal(density),
                       fillOpacity = 0,
                       label = labels,
@@ -191,7 +192,11 @@ server <- function(input, output) {
                         style = list("font-weight" = "normal", padding = "3px 8px"),
                         textsize = "15px",
                         direction = "auto"),
-                      highlightOptions = highlightOptions(color = "white", weight=4, bringToFront=TRUE)) #%>%
+                      highlightOptions = highlightOptions(color="#8F9DAA",
+                                                          weight=4,
+                                                          opacity=1,
+                                                          bringToFront=TRUE,
+                                                          sendToBack=TRUE)) #%>%
           #addPolygons(data=cityBoundary, fill=FALSE, color='#444444', weight=2, group="Bounday")
       
       } else {
