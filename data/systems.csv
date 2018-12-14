@@ -1,24 +1,24 @@
-city_name,city,provider,gbfs_freebike_url
-Los Angeles Region,la_region,bird,https://mds.bird.co/gbfs/los-angeles/free_bikes
-Los Angeles Region,la_region,lime,https://lime.bike/api/partners/v1/gbfs/los_angeles/free_bike_status.json
-Los Angeles Region,la_region,jump,https://la.jumpbikes.com/opendata/free_bike_status.json
-Los Angeles Region,la_region,lyft,https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json
-Los Angeles Region,la_region,razor,https://razor-200806.appspot.com/api/v2/gbfs
-Detroit,detroit,spin,https://web.spin.pm/api/gbfs/v1/detroit/free_bike_status.json
-Detroit,detroit,lime,https://data.lime.bike/api/partners/v1/gbfs/detroit/gbfs.json
-Chicago,chicago,lime,https://data.lime.bike/api/partners/v1/gbfs/chicago/free_bike_status.json
-Arlington,arlington,lime,https://data.lime.bike/api/partners/v1/gbfs/arlington/free_bike_status.json
-Washington DC,washington_dc,lime,https://data.lime.bike/api/partners/v1/gbfs/washington_dc/free_bike_status.json
-New York City,new_york,lime,https://data.lime.bike/api/partners/v1/gbfs/new_york/free_bike_status.json
-Chicago,chicago,jump,http://chi.jumpbikes.com/opendata/free_bike_status.json
-Washington DC,washington_dc,jump,https://dc.jumpmobility.com/opendata/free_bike_status.json
-Denver,denver,jump,https://den.jumpbikes.com/opendata/free_bike_status.json
-New York City,new_york,jump,https://nyc.jumpbikes.com/opendata/free_bike_status.json
-Providence,providence,jump,https://pvd.jumpbikes.com/opendata/free_bike_status.json
-San Diego,san_diego,jump,https://san.jumpbikes.com/opendata/free_bike_status.json
-San Francisco,san_francisco,jump,http://sf.jumpbikes.com/opendata/free_bike_status.json
-Santa Cruz,santa_cruz,jump,https://sc.jumpbikes.com/opendata/free_bike_status.json
-Seattle,seattle,jump,https://sea.jumpbikes.com/opendata/free_bike_status.json
-Austin,austin,jump,https://atx.jumpbikes.com/opendata/free_bike_status.json
-Sacramento,sacramento,jump,https://sac.jumpbikes.com/opendata/free_bike_status.json
-Washington DC,washington_dc,spin,https://web.spin.pm/api/gbfs/v1/washington_dc/free_bike_status
+city_name,city,provider_name,provider,gbfs_freebike_url
+Los Angeles Region,la_region,Bird,bird,https://mds.bird.co/gbfs/los-angeles/free_bikes
+Los Angeles Region,la_region,Lime,lime,https://lime.bike/api/partners/v1/gbfs/los_angeles/free_bike_status.json
+Los Angeles Region,la_region,JUMP,jump,https://la.jumpbikes.com/opendata/free_bike_status.json
+Los Angeles Region,la_region,Lyft,lyft,https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json
+Los Angeles Region,la_region,Razor,razor,https://razor-200806.appspot.com/api/v2/gbfs
+Detroit,detroit,Spin,spin,https://web.spin.pm/api/gbfs/v1/detroit/free_bike_status.json
+Detroit,detroit,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/detroit/gbfs.json
+Chicago,chicago,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/chicago/free_bike_status.json
+Arlington,arlington,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/arlington/free_bike_status.json
+Washington DC,washington_dc,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/washington_dc/free_bike_status.json
+New York City,new_york,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/new_york/free_bike_status.json
+Chicago,chicago,JUMP,jump,http://chi.jumpbikes.com/opendata/free_bike_status.json
+Washington DC,washington_dc,JUMP,jump,https://dc.jumpmobility.com/opendata/free_bike_status.json
+Denver,denver,JUMP,jump,https://den.jumpbikes.com/opendata/free_bike_status.json
+New York City,new_york,JUMP,jump,https://nyc.jumpbikes.com/opendata/free_bike_status.json
+Providence,providence,JUMP,jump,https://pvd.jumpbikes.com/opendata/free_bike_status.json
+San Diego,san_diego,JUMP,jump,https://san.jumpbikes.com/opendata/free_bike_status.json
+San Francisco,san_francisco,JUMP,jump,http://sf.jumpbikes.com/opendata/free_bike_status.json
+Santa Cruz,santa_cruz,JUMP,jump,https://sc.jumpbikes.com/opendata/free_bike_status.json
+Seattle,seattle,JUMP,jump,https://sea.jumpbikes.com/opendata/free_bike_status.json
+Austin,austin,JUMP,jump,https://atx.jumpbikes.com/opendata/free_bike_status.json
+Sacramento,sacramento,JUMP,jump,https://sac.jumpbikes.com/opendata/free_bike_status.json
+Washington DC,washington_dc,Spin,spin,https://web.spin.pm/api/gbfs/v1/washington_dc/free_bike_status
