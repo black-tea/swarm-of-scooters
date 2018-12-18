@@ -3,7 +3,6 @@ Los Angeles Region,la_region,Bird,bird,https://mds.bird.co/gbfs/los-angeles/free
 Los Angeles Region,la_region,Lime,lime,https://lime.bike/api/partners/v1/gbfs/los_angeles/free_bike_status.json
 Los Angeles Region,la_region,JUMP,jump,https://la.jumpbikes.com/opendata/free_bike_status.json
 Los Angeles Region,la_region,Lyft,lyft,https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json
-Los Angeles Region,la_region,Razor,razor,https://razor-200806.appspot.com/api/v2/gbfs
 Detroit,detroit,Spin,spin,https://web.spin.pm/api/gbfs/v1/detroit/free_bike_status.json
 Detroit,detroit,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/detroit/gbfs.json
 Chicago,chicago,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/chicago/free_bike_status.json
