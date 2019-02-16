@@ -26,7 +26,7 @@ The following table includes the URL for the LA GBFS feed for each provider, as 
 | Lyft     | ![lyft]   | #4F1397 | https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json      |
 | Razor    | ![razor]  | #FF0000 | https://razor-200806.appspot.com/api/v2/gbfs                                             |
 | Skip     | ![skip]   | #FCCE24 |                                                                                          |
-| Spin     | ![spin]   | ####### |                                                                                          |
+| Spin     | ![spin]   | #FF5503 |                                                                                          |
 | Wheels   | ![wheels] | #3D4CB7 | https://la-gbfs.getwheelsapp.com/free_bike_status.json                                   | 
 | Wind     | ![wind]   | #5E7C8B | https://partners.wind.co/gbfs/los_angeles                                                |
 
