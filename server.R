@@ -27,12 +27,7 @@ createProviderLegend <- function(selectedCity, providerList) {
 
 getDocklessDevices <- function (provider, url) {
   ## Sumbit GET request to Provider API for location of dockless devices
-
-  #rdfs <- lapply(url, callAPI)
-  print(provider)
   rdf <- callAPI(url)
-  #print(rdfs)
-  #rdf <- rbindlist(rdfs)
 
   # format data, if exists
   if(is.data.frame(rdf)){
@@ -73,7 +68,6 @@ callAPI <- function (url) {
     dflist <- vector(mode = 'list', length = lastpg + 1)
     
     for(i in seq(1, lastpg)){
-      print(i)
       paginatedurl <- paste0(url, "?page=", i)
       page <- GET(paginatedurl)
       df <- jsonlite::fromJSON(content(page, as='text'), flatten=TRUE)
@@ -97,7 +91,6 @@ server <- function(input, output) {
   
   selectedCityR <- reactive({
     if(!is.null(input$citychoice) & length(input$citychoice)>1){
-      print(input$citychoice)
       return(input$citychoice)
     } else {return(NULL)}})
   systemsR <- reactive({
@@ -109,21 +102,17 @@ server <- function(input, output) {
   allbikes <- reactive({
     input$download
     systemsR <- systemsR()
-    print(systemsR)
     if(!is.null(systemsR)){
       urls <- systemsR$gbfs_freebike_url
-      print(urls)
       cityProviders <- systemsR$provider
-      print(cityProviders)
       withProgress(message="Fetching Data...", {
         percentage <- 0
         allbikes <- mapply(function(x,y) {
           percentage <<- percentage + 1/length(cityProviders)*100
           incProgress(1/length(cityProviders), detail=toString(x))
           getDocklessDevices(x, y)
-        }, cityProviders, urls)#, simplify=FALSE)
+        }, cityProviders, urls, SIMPLIFY=FALSE)
       })
-      print(urls)
       allbikes <- do.call('rbind', allbikes)
       return(allbikes)
     } else {return(NULL)}
@@ -144,7 +133,8 @@ server <- function(input, output) {
       return()
     bikes <- allbikes() %>%
       filter(provider %in% input$providerGroup) %>%
-      filter(vehicle_type %in% input$deviceGroup)})
+      filter(vehicle_type %in% input$deviceGroup)
+    })
 
   neighborhoodCt <- reactive({
     if(is.null(allbikes()))
@@ -163,20 +153,18 @@ server <- function(input, output) {
     return(neighborhoodCt)
   })
   
-  #test <- observe(print(input$citychoice))
   
   output$citySelect <- renderUI({
     cities <- setNames(as.character(systems$city), systems$city_name)
     selectizeInput(inputId='citychoice',
                    label='City',
-                   #selected='la_region',
                    choices=cities,
                    selected=2,
                    multiple=FALSE)
   })
   
   output$providerSelect <- renderUI({
-    if(is.null(input$citychoice)|length(input$citychoice)==1)
+    if(is.null(input$citychoice))
       return()
     providerLegend <- createProviderLegend(input$citychoice, systems)
     checkboxGroupInput('providerGroup',
@@ -190,7 +178,6 @@ server <- function(input, output) {
   output$map <- renderLeaflet({
     map <- leaflet(options(leafletOptions(preferCanvas = TRUE))) %>%
       addProviderTiles(providers$CartoDB.Positron, options = providerTileOptions(
-        minZoom=10,
         maxZoom=18,
         updateWhenZooming=FALSE,
         updateWhenIdle=TRUE)) %>%
@@ -198,11 +185,20 @@ server <- function(input, output) {
     map
     })
   
+  # New observer to zoom with change of city
+  observeEvent(input$citychoice, {
+    if(is.null(filteredBikes())|nrow(filteredBikes())<1)
+      return()
+    filteredBikes <- filteredBikes()
+    bbox <- unname(st_bbox(filteredBikes)) # fitBounds won't accept named vectors, so unname
+    # the code seems to fail for detroit before it hits this point
+    leafletProxy("map") %>% fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
+  })
+  
   # Add bikes to map
   observeEvent(filteredBikes(), {
     bikes <- filteredBikes()
     radius <- radius()
-    print('triggered filteredBikes() observer')
     pal <- colorFactor(c('#24D000', '#F36396', '#4F1397','#5DBCD2','#000000'),
                        domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
                        ordered=TRUE)
@@ -220,8 +216,7 @@ server <- function(input, output) {
   } else {leafletProxy("map") %>% clearMarkers()}})
   
   # Change  
-  observeEvent(zoomOutThreshold(),{
-    print("triggered zoom threshold")
+  observeEvent(c(zoomOutThreshold(),filteredBikes()),{
     
     radius <- radius()
     bikes <- filteredBikes()
