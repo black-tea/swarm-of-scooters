@@ -199,8 +199,8 @@ server <- function(input, output) {
   observeEvent(filteredBikes(), {
     bikes <- filteredBikes()
     radius <- radius()
-    pal <- colorFactor(c('#24D000', '#F36396', '#4F1397','#5DBCD2','#000000'),
-                       domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
+    pal <- colorFactor(c('#24D000', '#F36396', '#4F1397','#5DBCD2','#000000','#FF5503'),
+                       domain=c('lime','jump','lyft','cyclehop','bird','spin'),
                        ordered=TRUE)
     
     if(nrow(bikes) > 1 && !is.null(bikes)){
@@ -221,8 +221,8 @@ server <- function(input, output) {
     radius <- radius()
     bikes <- filteredBikes()
     neighborhoodCt <- neighborhoodCt()
-    pal <- colorFactor(c('#24D000', '#F36396', '#4F1397','#5DBCD2','#000000'),
-                       domain=c('lime', 'jump', 'lyft','cyclehop','bird'),
+    pal <- colorFactor(c('#24D000', '#F36396', '#4F1397','#5DBCD2','#000000','#FF5503'),
+                       domain=c('lime', 'jump', 'lyft','cyclehop','bird','spin'),
                        ordered=TRUE)
 
       if(input$map_zoom < 13){
