@@ -2,12 +2,13 @@
 ![screenshot] 
 This web map shows the current location of all available dockless devices available for select cities. This map was constructed using R's Shiny Library.
 
-#### TODO
-- [ ] Get color fix for Spin
-- [ ] Add Spin URL for LA
+#### TODO  
+- [x] Fix color for Spin
+- [x] Spin LA URL
 - [ ] LA Neighborhood for outside LA City
 - [ ] Add NY, DC, Chicago, SF, etc. neighborhoods
 - [ ] Move to shinyapps.io
+
 
 #### GBFS Feeds
 These data are made publicly available by dockless mobility companies either voluntarily or as required by municipalities for a permit to operate. They are formatted according to the [General Bikeshare Feed Specification (GBFS)](https://github.com/NABSA/gbfs) that is maintained by the [North American Bike Share Association (NABSA)](https://nabsa.net/). Although GBFS was originally designed for docked bikeshare, it can be adapted fairly easily to cover the broader category of dockless devices as well.  
