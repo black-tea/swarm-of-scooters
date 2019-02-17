@@ -5,8 +5,11 @@ This web map shows the current location of all available dockless devices availa
 #### TODO  
 - [x] Fix color for Spin
 - [x] Spin LA URL
-- [ ] LA Neighborhood for outside LA City
-- [ ] Add NY, DC, Chicago, SF, etc. neighborhoods
+- [ ] DC Neighborhood Map: http://data.codefordc.org/dataset/neighborhood-boundaries-217-neighborhoods-washpost-justgrimes
+- [ ] Denver Neighborhood Map: https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-statistical-neighborhoods
+- [ ] San Diego Communities: http://sangis.org/docs/news/Layer_Update_Report.pdf
+- [ ] SF Neighborhood Map: https://data.sfgov.org/Geographic-Locations-and-Boundaries/SF-Find-Neighborhoods/pty2-tcw4
+- [ ] LA Neighborhoods outside city boundaries?
 - [ ] Move to shinyapps.io
 
 
