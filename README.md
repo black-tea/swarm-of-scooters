@@ -5,6 +5,9 @@ This web map shows the current location of all available dockless devices availa
 #### TODO  
 - [x] Fix color for Spin
 - [x] Spin LA URL
+- [x] Add Bird GBFS feeds
+- [ ] Make sure initial city selected is Los Angeles
+- [ ] Project write-up
 - [ ] DC Neighborhood Map: http://data.codefordc.org/dataset/neighborhood-boundaries-217-neighborhoods-washpost-justgrimes
 - [ ] Denver Neighborhood Map: https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-statistical-neighborhoods
 - [ ] San Diego Communities: http://sangis.org/docs/news/Layer_Update_Report.pdf
