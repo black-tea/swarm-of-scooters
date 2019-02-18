@@ -37,3 +37,6 @@ Tempe,tempe,Bird,bird,https://mds.bird.co/gbfs/tempe/free_bikes
 Washington DC,washington_dc,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/washington_dc/free_bike_status.json
 Washington DC,washington_dc,JUMP,jump,https://dc.jumpmobility.com/opendata/free_bike_status.json
 Washington DC,washington_dc,Spin,spin,https://web.spin.pm/api/gbfs/v1/washington_dc/free_bike_status
+Washington DC,washington_dc,Bird,bird,https://gbfs.bird.co/dc
+Washington DC,washington_dc,Lyft,lyft,https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/dca/free_bike_status.json
+Washington DC,washington_dc,Skip,skip,https://us-central1-waybots-production.cloudfunctions.net/dcFreeBikeStatus
