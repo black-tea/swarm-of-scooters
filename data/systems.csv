@@ -1,5 +1,5 @@
 city_name,city,provider_name,provider,gbfs_freebike_url
-Arlington,arlington,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/arlington/free_bike_status.json
+Washington DC,washington_dc,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/arlington/free_bike_status.json
 Atlanta,atlanta,Bird,bird,https://mds.bird.co/gbfs/atlanta/free_bikes
 Ann Arbor,ann_arbor,Bird,bird,https://mds.bird.co/gbfs/ann-arbor/free_bikes
 Austin,austin,JUMP,jump,https://atx.jumpbikes.com/opendata/free_bike_status.json
