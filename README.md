@@ -7,8 +7,8 @@ This web map shows the current location of all available dockless devices availa
 - [x] Spin LA URL
 - [x] Add Bird GBFS feeds
 - [ ] Add total device count
-- [ ] Add Santa Monica for Bird / Lime
-- [ ] Combine Arlington w/ DC
+- [ ] Add Santa Monica for Lime
+- [x] Combine Arlington w/ DC
 - [x] Make sure initial city selected is Los Angeles
 - [ ] Project write-up
 - [ ] DC Neighborhood Map: http://data.codefordc.org/dataset/neighborhood-boundaries-217-neighborhoods-washpost-justgrimes
@@ -18,6 +18,8 @@ This web map shows the current location of all available dockless devices availa
 - [ ] LA Neighborhoods outside city boundaries?
 - [x] Move to shinyapps.io
 - [x] Fix issue: Cities w/out bikes
+- [ ] Move hex colors to `data` and import into app
+- [ ] Add Wheels & Skip to map
 
 
 #### GBFS Feeds
