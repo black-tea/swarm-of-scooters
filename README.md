@@ -7,14 +7,15 @@ This web map shows the current location of all available dockless devices availa
 - [x] Spin LA URL
 - [x] Add Bird GBFS feeds
 - [ ] Add total device count
-- [ ] Make sure initial city selected is Los Angeles
+- [ ] Add Santa Monica for Bird / Lime
+- [x] Make sure initial city selected is Los Angeles
 - [ ] Project write-up
 - [ ] DC Neighborhood Map: http://data.codefordc.org/dataset/neighborhood-boundaries-217-neighborhoods-washpost-justgrimes
 - [ ] Denver Neighborhood Map: https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-statistical-neighborhoods
 - [ ] San Diego Communities: http://sangis.org/docs/news/Layer_Update_Report.pdf
 - [ ] SF Neighborhood Map: https://data.sfgov.org/Geographic-Locations-and-Boundaries/SF-Find-Neighborhoods/pty2-tcw4
 - [ ] LA Neighborhoods outside city boundaries?
-- [ ] Move to shinyapps.io
+- [x] Move to shinyapps.io
 
 
 #### GBFS Feeds
