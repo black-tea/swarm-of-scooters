@@ -20,6 +20,7 @@ Los Angeles Region,la_region,Bird,bird,https://mds.bird.co/gbfs/los-angeles/free
 Los Angeles Region,la_region,Lime,lime,https://lime.bike/api/partners/v1/gbfs/los_angeles/free_bike_status.json
 Los Angeles Region,la_region,JUMP,jump,https://la.jumpbikes.com/opendata/free_bike_status.json
 Los Angeles Region,la_region,Lyft,lyft,https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json
+Los Angeles Region,la_region,HOPR,hopr,https://gbfs.hopr.city/api/gbfs/5/free_bike_status
 Louisville,louisville,Bird,bird,https://mds.bird.co/gbfs/louisville/free_bikes
 Miami,miami,Bird,bird,https://mds.bird.co/gbfs/miami/free_bikes
 Nashville,nashville,Bird,bird,https://mds.bird.co/gbfs/nashville/free_bikes
