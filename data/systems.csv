@@ -1,5 +1,6 @@
 city_name,city,provider_name,provider,gbfs_freebike_url
 Atlanta,atlanta,Bird,bird,https://mds.bird.co/gbfs/atlanta/free_bikes
+Atlanta,atlanta,Bird,bird,https://mds.bird.co/gbfs/georgiatech/free_bikes
 Ann Arbor,ann_arbor,Bird,bird,https://mds.bird.co/gbfs/ann-arbor/free_bikes
 Austin,austin,JUMP,jump,https://atx.jumpbikes.com/opendata/free_bike_status.json
 Baltimore,baltimore,Bird,bird,https://mds.bird.co/gbfs/baltimore/free_bikes
