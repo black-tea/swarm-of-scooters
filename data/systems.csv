@@ -1,5 +1,4 @@
 city_name,city,provider_name,provider,gbfs_freebike_url
-Washington DC,washington_dc,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/arlington/free_bike_status.json
 Atlanta,atlanta,Bird,bird,https://mds.bird.co/gbfs/atlanta/free_bikes
 Ann Arbor,ann_arbor,Bird,bird,https://mds.bird.co/gbfs/ann-arbor/free_bikes
 Austin,austin,JUMP,jump,https://atx.jumpbikes.com/opendata/free_bike_status.json
@@ -35,6 +34,7 @@ Santa Cruz,santa_cruz,JUMP,jump,https://sc.jumpbikes.com/opendata/free_bike_stat
 Seattle,seattle,JUMP,jump,https://sea.jumpbikes.com/opendata/free_bike_status.json
 Tempe,tempe,Bird,bird,https://mds.bird.co/gbfs/tempe/free_bikes
 Washington DC,washington_dc,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/washington_dc/free_bike_status.json
+Washington DC,washington_dc,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/arlington/free_bike_status.json
 Washington DC,washington_dc,JUMP,jump,https://dc.jumpmobility.com/opendata/free_bike_status.json
 Washington DC,washington_dc,Spin,spin,https://web.spin.pm/api/gbfs/v1/washington_dc/free_bike_status
 Washington DC,washington_dc,Bird,bird,https://gbfs.bird.co/dc
