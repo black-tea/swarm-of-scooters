@@ -8,6 +8,7 @@ This web map shows the current location of all available dockless devices availa
 - [x] Add Bird GBFS feeds
 - [ ] Add total device count
 - [ ] Add Santa Monica for Bird / Lime
+- [ ] Combine Arlington w/ DC
 - [x] Make sure initial city selected is Los Angeles
 - [ ] Project write-up
 - [ ] DC Neighborhood Map: http://data.codefordc.org/dataset/neighborhood-boundaries-217-neighborhoods-washpost-justgrimes
@@ -16,6 +17,7 @@ This web map shows the current location of all available dockless devices availa
 - [ ] SF Neighborhood Map: https://data.sfgov.org/Geographic-Locations-and-Boundaries/SF-Find-Neighborhoods/pty2-tcw4
 - [ ] LA Neighborhoods outside city boundaries?
 - [x] Move to shinyapps.io
+- [x] Fix issue: Cities w/out bikes
 
 
 #### GBFS Feeds
