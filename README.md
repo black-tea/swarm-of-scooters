@@ -7,7 +7,8 @@ This web map shows the current location of all available dockless devices availa
 - [x] Spin LA URL
 - [x] Add Bird GBFS feeds
 - [ ] Add total device count
-- [ ] Add Santa Monica for Lime
+- [ ] Fix temporary company filter holdover
+- [ ] Add Santa Monica for Lime (where is the gbfs feed???)
 - [x] Combine Arlington w/ DC
 - [x] Make sure initial city selected is Los Angeles
 - [ ] Project write-up
@@ -28,20 +29,20 @@ These data are made publicly available by dockless mobility companies either vol
 The table in `data/systems.csv` lists all the GBFS feeds for dockless mobility companies that I currently have. In many cases, I was able to get data from NABSA's [`systems.csv`](https://github.com/NABSA/gbfs/blob/master/systems.csv). However, in other cases I was able to find publicly-available feeds that were not listed on that list. For example, Bird does not post any of their system information there. 
 
 #### Map Styling
-The following table includes the URL for the LA GBFS feed for each provider, as well as the color that I used to symbolize the provider in the map.
+The following table includes the color that I used to symbolize the provider in the map. I will update the table (and map) as I add any new providers.
 
-| Provider |   Icon    |   Hex   | GBFS URL                                                                                 |
-|:--------:|:---------:|:-------:|:---------------------------------------------------------------------------------------- |
-| Bird     | ![bird]   | #000000 | https://mds.bird.co/gbfs/los-angeles/free_bikes                                          |
-| HOPR     | ![hopr]   | #5DBCD2 | https://gbfs.hopr.city/api/gbfs/5/free_bike_status                                       |
-| JUMP     | ![jump]   | #F36396 | https://la.jumpbikes.com/opendata/free_bike_status.json                                  |
-| Lime     | ![lime]   | #24D000 | https://lime.bike/api/partners/v1/gbfs/los_angeles/free_bike_status.json                 |
-| Lyft     | ![lyft]   | #4F1397 | https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/lax/free_bike_status.json      |
-| Razor    | ![razor]  | #FF0000 | https://razor-200806.appspot.com/api/v2/gbfs                                             |
-| Skip     | ![skip]   | #FCCE24 |                                                                                          |
-| Spin     | ![spin]   | #FF5503 | https://web.spin.pm/api/gbfs/v1/los_angeles/free_bike_status.json                        |
-| Wheels   | ![wheels] | #3D4CB7 | https://la-gbfs.getwheelsapp.com/free_bike_status.json                                   | 
-| Wind     | ![wind]   | #5E7C8B | https://partners.wind.co/gbfs/los_angeles                                                |
+| Provider |   Icon    |   Hex   |
+|:--------:|:---------:|:-------:|
+| Bird     | ![bird]   | #000000 |
+| HOPR     | ![hopr]   | #5DBCD2 |
+| JUMP     | ![jump]   | #F36396 |
+| Lime     | ![lime]   | #24D000 |
+| Lyft     | ![lyft]   | #4F1397 |
+| Razor    | ![razor]  | #FF0000 |
+| Skip     | ![skip]   | #FCCE24 |                                                                                          
+| Spin     | ![spin]   | #FF5503 |
+| Wheels   | ![wheels] | #3D4CB7 |
+| Wind     | ![wind]   | #5E7C8B |
 
 #### Neighborhoods
 Zooming out on the map will triggers neighborhood polygon overlays with devices counts for each.
