@@ -48,7 +48,7 @@ The following table includes the color that I used to symbolize the provider in 
 Zooming out on the map will triggers neighborhood polygon overlays with devices counts for each.
 
 [bird]: www/bird_circle2.png
-[hopr]: www/hopr_circle.png
+[hopr]: www/cyclehop_circle.png
 [jump]: www/jump_circle.png
 [lime]: www/lime_circle.png
 [lyft]: www/lyft_circle.png
