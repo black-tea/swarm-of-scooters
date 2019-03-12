@@ -18,8 +18,8 @@ This web map shows the current location of all available dockless devices availa
 - [ ] LA Neighborhoods outside city boundaries?
 - [x] Move to shinyapps.io
 - [x] Fix issue: Cities w/out bikes
-- [ ] Move hex colors to `data` and import into app
-- [ ] Add Wheels & Skip to map
+- [x] Move hex colors to `data` and import into app
+- [x] Add Wheels & Skip to map
 
 
 #### GBFS Feeds
