@@ -16,6 +16,7 @@ This web map shows the current location of all available dockless devices availa
 - [ ] Denver Neighborhood Map: https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-statistical-neighborhoods
 - [ ] San Diego Communities: http://sangis.org/docs/news/Layer_Update_Report.pdf
 - [ ] SF Neighborhood Map: https://data.sfgov.org/Geographic-Locations-and-Boundaries/SF-Find-Neighborhoods/pty2-tcw4
+- [ ] NYC Boroughs: https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm
 - [ ] LA Neighborhoods outside city boundaries?
 - [x] Move to shinyapps.io
 - [x] Fix issue: Cities w/out bikes
