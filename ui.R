@@ -21,7 +21,6 @@ dashboardPage(
       sidebarMenu(
         uiOutput('citySelect'),
         uiOutput('providerSelect'),
-        #checkboxGroupInput('providerGroup', label='Provider', choiceNames=providerHTML, choiceValues=providerValues, selected=providerValues),
         checkboxGroupInput('deviceGroup', label='Device Type', choices=deviceTypes, selected=deviceTypes, inline=TRUE),
         actionButton("download", "Refresh Data")),
         HTML("<div style='padding-left:15px; padding-right:15px'><i>This map shows the current location of all dockless
