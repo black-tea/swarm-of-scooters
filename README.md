@@ -7,7 +7,7 @@ This web map shows the current location of all available dockless devices availa
 - [x] Spin LA URL
 - [x] Add Bird GBFS feeds
 - [ ] Add total device count
-- [ ] Fix temporary company filter holdover
+- [x] Fix temporary company filter holdover
 - [ ] Add Santa Monica for Lime (where is the gbfs feed???)
 - [x] Combine Arlington w/ DC
 - [x] Make sure initial city selected is Los Angeles
