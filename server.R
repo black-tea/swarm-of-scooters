@@ -13,17 +13,35 @@ library(htmltools)
 library(lwgeom)
 
 ### Functions
-createProviderLegend <- function(selectedCity, providerList) {
+createProviderLegend <- function(selectedCity, providerList, providerCounts) {
   
   # Filter providers based on checkbox
-  providerList <- providerList %>% filter(city == selectedCity) %>% select(provider_name, provider)
-  cityProviderValues <- unique(providerList$provider)
-  cityProviderNames <- unique(providerList$provider_name)
+  providerList <- providerList %>%
+    dplyr::filter(city == selectedCity) %>%
+    dplyr::select(provider_name, provider) %>%
+    dplyr::distinct()
+  
+  # Join to df of device counts
+  if(!is.null(providerCounts)){
+    providerList <- providerList %>%
+      dplyr::left_join(providerCounts, by='provider') %>%
+      replace(is.na(.), 0)
+    
+    # Extract counts
+    cityProviderCounts <- providerList$n
+  } else {
+    # If no devices in a city, create vector of length n w/ value = 0
+    cityProviderCounts <- rep(0, length(providerList$provider))
+  }
+    
+  # Convert df to lists
+  cityProviderValues <- providerList$provider
+  cityProviderNames <- providerList$provider_name
   
   # Generate HTML for selected providers
   providerHTML <- lapply(1:length(cityProviderNames), function(x){
-    lblHTML <- '<img src="%s_circle.png" height="12" width="12" style="margin: 0px 4px 2px 0px">%s'
-    return(HTML(sprintf(lblHTML, cityProviderValues[x], cityProviderNames[x])))
+    lblHTML <- '<img src="%s_circle.png" height="12" width="12" style="margin: 0px 4px 2px 0px">%s (%d)'
+    return(HTML(sprintf(lblHTML, cityProviderValues[x], cityProviderNames[x], cityProviderCounts[x])))
   })
   
   # Return HTML and list of providers
@@ -52,24 +70,25 @@ getDocklessDevices <- function (provider, url) {
     
     # format as sf df
     bikes <- rdf %>%
-      st_as_sf(coords = c('lon','lat')) %>%
-      mutate(provider = provider) %>%
-      select(provider, vehicle_type) %>%
-      st_set_crs(4326)
+      sf::st_as_sf(coords = c('lon','lat')) %>%
+      dplyr::mutate(provider = provider) %>%
+      dplyr::select(provider, vehicle_type) %>%
+      sf::st_set_crs(4326)
     return(bikes)
     }
 }
 
 callAPI <- function (url) {
   ## Sumbit GET request to Provider API for location of dockless devices
-  print("calling API")
+  print(sprintf("Calling API for %s",url))
   r <- GET(url)
   df <- jsonlite::fromJSON(content(r, as='text', encoding = "UTF-8"), flatten=TRUE)
-  print("Printing df")
   # print(df)
   rdf <- df$data$bikes
-  print("length of rdf")
-  print(length(rdf))
+  
+  # Support for non-standard format (skip)
+  if(is.null(rdf))
+    rdf <- df$bikes
   
   # Support for paginated endpoints (lime)
   if(!is.null(df$max_page) && length(rdf) > 0){
@@ -84,14 +103,27 @@ callAPI <- function (url) {
       dflist[[i+1]] <- df$data$bikes}
     rdf <- rbindlist(dflist)
     rdf <- rdf %>% mutate(lon = as.double(lon), lat = as.double(lat))}
-  print("about to return rdf")
   return(rdf)
+}
+
+# Filter bikes based on user input
+filterBikes <- function(bikes, providers, devicetypes){
+  
+  if(is.null(bikes))
+    return()
+  
+  filteredBikes <- bikes %>%
+    filter(provider %in% providers) %>%
+    filter(vehicle_type %in% devicetypes)
+  
+  return(filteredBikes)
 }
 
 
 ### Load Data
 # Get systems list from GitHub
 systems <- read_csv('https://raw.githubusercontent.com/black-tea/scooties/master/data/systems.csv')
+providerColors <- read_csv('https://raw.githubusercontent.com/black-tea/scooties/master/data/provider_colors.csv')
 
 # Select providers from systems list
 providerlist <- systems %>%
@@ -102,7 +134,7 @@ providerlist <- systems %>%
 cities <- setNames(as.character(systems$city), systems$city_name)
 cities <- cities[!duplicated(cities)]
 
-# Neighborhood data
+# Neighborhoods
 neighborhoods <- st_read('data/la_neighborhoods/la_city.shp')
 
 ### Server
@@ -124,32 +156,46 @@ server <- function(input, output) {
   
   # Dockless Vehicles
   allbikes <- reactive({
-    print("allbikes reactive triggered")
+    
+    # Reactive triggered if user hits "Refresh Data"
     input$download
     systemsR <- systemsR()
-    if(!is.null(systemsR)){
-      urls <- systemsR$gbfs_freebike_url
-      print(urls)
-      cityProviders <- systemsR$provider
-      withProgress(message="Fetching Data...", {
-        percentage <- 0
-        print("percentage")
-        allbikes <- mapply(function(x,y) {
-          percentage <<- percentage + 1/length(cityProviders)*100
-          incProgress(1/length(cityProviders), detail=toString(x))
-          getDocklessDevices(x, y)
-        }, cityProviders, urls, SIMPLIFY=FALSE)
-      })
-      print("done with download!")
-      allbikes <- do.call('rbind', allbikes)
-      print("result of allbikes")
-      print(nrow(allbikes))
-      return(allbikes)
-    } else {return(NULL)}
+    
+    if(is.null(systemsR))
+      return()
+    
+    # Get provider & GBFS URL
+    urls <- systemsR$gbfs_freebike_url
+    cityProviders <- systemsR$provider
+    
+    # Get data w/ Progress Bar
+    withProgress(message="Fetching Data...", {
+      percentage <- 0
+      allbikes <- mapply(function(x,y) {
+        percentage <<- percentage + 1/length(cityProviders)*100
+        incProgress(1/length(cityProviders), detail=toString(x))
+        getDocklessDevices(x, y)
+      }, cityProviders, urls, SIMPLIFY=FALSE)
+    })
+
+    # Combine lists and return
+    allbikes <- do.call('rbind', allbikes)
+    return(allbikes)
   })
   
-  # Refresh Fetch
-  observeEvent(input$download, {allbikes()})
+  # Summarize Device Counts by Provider
+  bikeCt <- reactive({
+    
+    if(is.null(allbikes()))
+      return()
+    
+    bikeCt <- allbikes() %>%
+      dplyr::count(provider) %>%
+      sf::st_set_geometry(NULL)
+    print(bikeCt)
+    return(bikeCt)
+
+  })
   
   # Circle radius changes at map zoom == 13
   radius <- reactive({ifelse(input$map_zoom<13,1,2)})
@@ -158,30 +204,37 @@ server <- function(input, output) {
     ifelse(input$map_zoom<13, zoomOutThreshold(TRUE), zoomOutThreshold(FALSE)) 
   })
   
-  # Filter bikes by Company
+  # Filter bikes by Company & Device Type
   filteredBikes <- reactive({
-    
+
     if(is.null(allbikes()))
       return()
-    
-    bikes <- allbikes() %>%
+
+    filteredBikes <- allbikes() %>%
       filter(provider %in% input$providerGroup) %>%
       filter(vehicle_type %in% input$deviceGroup)
-    
-    return(bikes)
+
+    return(filteredBikes)
     })
 
   # Count devices in each neighborhood
   neighborhoodCt <- reactive({
-    
-    if(is.null(allbikes()))
+
+    bikes <- filteredBikes()
+    if(is.null(bikes))
       return()
     
-    ct <- filteredBikes() %>%
+    # If input$providerGroup is null, run it on the entire allbikes()
+    if(is.null(input$providerGroup))
+      bikes <- allbikes()
+
+    # Count devices
+    ct <- bikes %>%
       sf::st_join(neighborhoods, join=st_within, left=FALSE) %>%
-      count(Name) %>%
+      dplyr::count(Name) %>%
       sf::st_set_geometry(NULL)
-    
+
+    # Join device count to neighborhood shp
     neighborhoodCt <- neighborhoods %>%
       dplyr::left_join(ct, by='Name') %>%
       dplyr::select(-Descriptio) %>%
@@ -189,7 +242,7 @@ server <- function(input, output) {
       dplyr::mutate(area = st_area(.)) %>%
       dplyr::mutate(area = units::set_units(st_area(.), mi^2)) %>%
       dplyr::mutate(density = n/area)
-    
+
     return(neighborhoodCt)
   })
   
@@ -209,7 +262,9 @@ server <- function(input, output) {
     if(is.null(input$citychoice))
       return()
     
-    providerLegend <- createProviderLegend(input$citychoice, systems)
+    bikeCt <- bikeCt()
+    
+    providerLegend <- createProviderLegend(input$citychoice, systems, bikeCt)
     checkboxGroupInput('providerGroup',
                        label='Provider',
                        choiceNames=providerLegend$providerHTML,
@@ -220,6 +275,7 @@ server <- function(input, output) {
   # Map
   output$map <- renderLeaflet({
     
+    # Intial map view set to LA
     map <- leaflet(options(leafletOptions(preferCanvas = TRUE))) %>%
       addProviderTiles(providers$CartoDB.Positron, options = providerTileOptions(
         maxZoom=18,
@@ -227,100 +283,115 @@ server <- function(input, output) {
         updateWhenIdle=TRUE)) %>%
       setView(lng=-118.329327, lat=34.0546143, zoom=12)
     
-    map
+    return(map)
     })
+
   
   # New observer to zoom with change of city
   observeEvent(input$citychoice, {
-    print("observing event: input$citychoice")
-    # Get systems for new city & exit if no bikes
+    
+    bikeCt <- bikeCt()
+    print(bikeCt)
+    
+    # Get systems for new city
     new_bikes <- allbikes()
-    print(nrow(new_bikes))
+    
+    # Display warning message if no bikes in City
     if(is.null(new_bikes)||nrow(new_bikes)<1){
-      return()}
-    
-    # Resize map bounds to extent
-    bbox <- unname(st_bbox(new_bikes)) # fitBounds won't accept named vectors, so unname
-    if(input$citychoice == "la_region"){
-      leafletProxy("map") %>% setView(lng=-118.329327, lat=34.0546143, zoom=12)
-    } else {
-      leafletProxy("map") %>% fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
-      }
-  })
-  
-  # Add bikes to map
-  observeEvent(filteredBikes(), {
-    bikes <- filteredBikes()
-    radius <- radius()
-    pal <- colorFactor(c('#24D000', '#F36396', '#4F1397','#5DBCD2','#000000','#FF5503'),
-                       domain=c('lime','jump','lyft','cyclehop','bird','spin'),
-                       ordered=TRUE)
-    
-    if(nrow(bikes) > 1 && !is.null(bikes)){
-      leafletProxy("map") %>%
-        clearMarkers() %>%
-        addCircleMarkers(data=bikes,
-                         radius=radius,
-                         stroke=FALSE,
-                         fillOpacity=0.9,
-                         fillColor=pal(bikes$provider),
-                         label=bikes$provider,
-                         group="Devices")
-  } else {leafletProxy("map") %>% clearMarkers()}})
-  
-  # Change  
-  observeEvent(c(zoomOutThreshold(),filteredBikes()),{
-    
-    radius <- radius()
-    bikes <- filteredBikes()
-    
-    if(is.null(bikes)){
       showNotification(paste0("No available devices in ",
                               names(which(cities == input$citychoice))),
                        type = "warning",
                        duration = 10)
-      return()}
+      return()
+    }
+
+    # fitBounds won't accept named vectors, so unname
+    bbox <- unname(st_bbox(new_bikes))
+
+    # Resize map bounds to extent
+    if(input$citychoice == "la_region"){
+      leafletProxy("map") %>% setView(lng=-118.329327, lat=34.0546143, zoom=12)
+    } else {
+      leafletProxy("map") %>% fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
+    }
+  })
+  
+  # Observer to focus on map points
+  observeEvent(c(zoomOutThreshold(),
+                 input$download,
+                 input$providerGroup,
+                 input$deviceGroup), {
     
-    neighborhoodCt <- neighborhoodCt()
-    pal <- colorFactor(c('#24D000', '#F36396', '#4F1397','#5DBCD2','#000000','#FF5503'),
-                       domain=c('lime', 'jump', 'lyft','cyclehop','bird','spin'),
+    if(is.null(input$map_zoom))
+      return()
+    
+    # Get bikes & circle radius, based on map zoom
+    bikes <- filteredBikes()
+    radius <- radius()
+    
+    if(nrow(bikes)<1||is.null(bikes))
+      return()
+
+    # Create color palette
+    pal <- colorFactor(providerColors$color,
+                       providerColors$provider,
                        ordered=TRUE)
+    
+    # Add devices to map
+    leafletProxy("map") %>%
+      clearMarkers() %>%
+      addCircleMarkers(data=bikes,
+                       radius=radius,
+                       stroke=FALSE,
+                       fillOpacity=0.9,
+                       fillColor=pal(bikes$provider),
+                       label=bikes$provider,
+                       group="Devices")
+  })
+  
+  # Observer focused on neighborhood boundaries
+  observeEvent(c(zoomOutThreshold(),
+                 input$download,
+                 input$providerGroup,
+                 input$deviceGroup), {
 
-      if(input$map_zoom < 13){
-        
-        labels <- sprintf(
-          "<strong>%s</strong><br/>%g devices",
-          neighborhoodCt$Name, neighborhoodCt$n
-        ) %>% lapply(htmltools::HTML)
-        
-        leafletProxy("map") %>%
-          clearShapes() %>%
-          clearMarkers() %>%
-          addPolygons(data = neighborhoodCt,
-                      weight = 0.1,
-                      opacity = .01,
-                      fillOpacity = 0,
-                      label = labels,
-                      labelOptions = labelOptions(
-                        style = list("font-weight" = "normal", padding = "3px 8px"),
-                        textsize = "15px",
-                        direction = "auto"),
-                      highlightOptions = highlightOptions(color="#8F9DAA",
-                                                          weight=4,
-                                                          opacity=1,
-                                                          bringToFront=TRUE))
-      
-      } else {leafletProxy("map") %>% clearShapes()}
+    if(is.null(input$map_zoom))
+      return()
+    
+    if(input$map_zoom > 12)
+      return()
 
-    if(nrow(bikes) > 1 && !is.null(bikes)){
-      leafletProxy("map") %>%
-        addCircleMarkers(data=bikes,
-                         radius=radius,
-                         stroke=FALSE,
-                         fillOpacity=0.9,
-                         fillColor=pal(bikes$provider),
-                         label=bikes$provider,
-                         group="Devices")}
+    # Get updated neighborhood counts
+    neighborhoodCt <- neighborhoodCt()
+    
+    if(is.null(neighborhoodCt))
+      return()
+    
+    # Create neighborhood label
+    labels <- sprintf(
+      "<strong>%s</strong><br/>%g devices",
+      neighborhoodCt$Name, neighborhoodCt$n
+    ) %>% lapply(htmltools::HTML)
+
+    # Add neighborhood layer on top of map
+    leafletProxy("map") %>%
+      clearShapes() %>%
+      addPolygons(data = neighborhoodCt,
+                  weight = 0.1,
+                  opacity = .01,
+                  fillOpacity = 0,
+                  label = labels,
+                  labelOptions = labelOptions(
+                    style = list("font-weight" = "normal", padding = "3px 8px"),
+                    textsize = "15px",
+                    direction = "auto"),
+                  highlightOptions = highlightOptions(color="#8F9DAA",
+                                                      weight=3,
+                                                      opacity=1,
+                                                      bringToFront=TRUE))
+
+
+
 
     })
 }
