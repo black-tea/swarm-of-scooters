@@ -23,10 +23,10 @@ dashboardPage(
         uiOutput('providerSelect'),
         checkboxGroupInput('deviceGroup', label='Device Type', choices=deviceTypes, selected=deviceTypes, inline=TRUE),
         actionButton("download", "Refresh Data")),
-        HTML("<div style='padding-left:15px; padding-right:15px'><i>This map shows the current location of all dockless
-             devices in the Los Angeles region based on publicly-available GBFS feeds.
-             For more information, visit <a href='https://github.com/black-tea/scooties'>
-             the GitHub project page</a>.</i></div>")),
+        HTML("<div style='padding-left:15px; padding-right:15px'><i>This map shows the current location of dockless
+             devices in cities throughout the U.S. based on publicly-available GBFS feeds.
+             Read more about the project <a href='https://medium.com/p/55a2afca46b1'>
+             here</a>.</i></div>")),
   dashboardBody(
     tags$head(tags$style(HTML('
       .main-header .logo {
