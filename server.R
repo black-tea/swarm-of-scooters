@@ -135,7 +135,10 @@ cities <- setNames(as.character(systems$city), systems$city_name)
 cities <- cities[!duplicated(cities)]
 
 # Neighborhoods
-neighborhoods <- st_read('data/la_neighborhoods/la_city.shp')
+neighborhoods <- st_read('data/neighborhoods/la_city.shp')
+nyc_neighborhoods <- st_read('data/neighborhoods/new_york.shp')
+# print(neighborhoods)
+# print(nyc_neighborhoods)
 
 ### Server
 server <- function(input, output) {
@@ -192,9 +195,8 @@ server <- function(input, output) {
     bikeCt <- allbikes() %>%
       dplyr::count(provider) %>%
       sf::st_set_geometry(NULL)
-    print(bikeCt)
+    
     return(bikeCt)
-
   })
   
   # Circle radius changes at map zoom == 13
@@ -289,9 +291,6 @@ server <- function(input, output) {
   
   # New observer to zoom with change of city
   observeEvent(input$citychoice, {
-    
-    bikeCt <- bikeCt()
-    print(bikeCt)
     
     # Get systems for new city
     new_bikes <- allbikes()
