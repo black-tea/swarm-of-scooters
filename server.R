@@ -50,7 +50,7 @@ createProviderLegend <- function(selectedCity, providerList, providerCounts) {
 
 getDocklessDevices <- function (provider, url) {
   ## Sumbit GET request to Provider API for location of dockless devices
-  rdf <- callAPI(url)
+  rdf <- try(callAPI(url))
   # print(rdf)
   # format data, if exists
   if(is.data.frame(rdf)){
@@ -83,7 +83,6 @@ callAPI <- function (url) {
   print(sprintf("Calling API for %s",url))
   r <- GET(url)
   df <- jsonlite::fromJSON(content(r, as='text', encoding = "UTF-8"), flatten=TRUE)
-  # print(df)
   rdf <- df$data$bikes
   
   # Support for non-standard format (skip)
