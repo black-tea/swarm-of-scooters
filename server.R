@@ -232,8 +232,8 @@ server <- function(input, output) {
     # Count devices
     ct <- bikes %>%
       sf::st_join(neighborhoods, join=st_within, left=FALSE) %>%
-      dplyr::count(Name) %>%
-      sf::st_set_geometry(NULL)
+      sf::st_set_geometry(NULL) %>%
+      dplyr::count(`Name`) 
 
     # Join device count to neighborhood shp
     neighborhoodCt <- neighborhoods %>%
