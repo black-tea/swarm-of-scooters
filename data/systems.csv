@@ -2,18 +2,18 @@ city_name,city,provider_name,provider,gbfs_freebike_url
 Atlanta,atlanta,Bird,bird,https://mds.bird.co/gbfs/atlanta/free_bikes
 Atlanta,atlanta,Bird,bird,https://mds.bird.co/gbfs/georgiatech/free_bikes
 Ann Arbor,ann_arbor,Bird,bird,https://mds.bird.co/gbfs/ann-arbor/free_bikes
-Austin,austin,JUMP,jump,https://gbfs.uber.com/v1/atxs/gbfs.json
-Austin,austin,JUMP,jump,https://gbfs.uber.com/v1/atxb/gbfs.json
+Austin,austin,JUMP,jump,https://gbfs.uber.com/v1/atxs/free_bike_status.json
+Austin,austin,JUMP,jump,https://gbfs.uber.com/v1/atxb/free_bike_status.json
 Baltimore,baltimore,Bird,bird,https://mds.bird.co/gbfs/baltimore/free_bikes
-Baltimore,baltimore,JUMP,jump,https://gbfs.uber.com/v1/balts/gbfs.json
+Baltimore,baltimore,JUMP,jump,https://gbfs.uber.com/v1/balts/free_bike_status.json
 Charlotte,charlotte,Bird,bird,https://mds.bird.co/gbfs/charlotte/free_bikes
 Chicago,chicago,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/chicago/free_bike_status.json
 Chicago,chicago,JUMP,jump,http://chi.jumpbikes.com/opendata/free_bike_status.json
 Dallas,dallas,Bird,bird,https://mds.bird.co/gbfs/dallas/free_bikes
-Denver,denver,JUMP,jump,https://gbfs.uber.com/v1/denb/gbfs.json
+Denver,denver,JUMP,jump,https://gbfs.uber.com/v1/denb/free_bike_status.json
 Denver,denver,Bird,bird,https://mds.bird.co/gbfs/denver/free_bikes
 Detroit,detroit,Spin,spin,https://web.spin.pm/api/gbfs/v1/detroit/free_bike_status.json
-Detroit,detroit,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/detroit/gbfs.json
+Detroit,detroit,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/detroit/free_bike_status.json
 Detroit,detroit,Bird,bird,https://mds.bird.co/gbfs/detroit/free_bikes
 Fort Lauderdale,fort_lauderdale,Bird,bird,https://mds.bird.co/gbfs/fort-lauderdale/free_bikes
 Los Angeles Region,la_region,Spin,spin,https://web.spin.pm/api/gbfs/v1/los_angeles/free_bike_status.json
@@ -28,26 +28,26 @@ Louisville,louisville,Bird,bird,https://mds.bird.co/gbfs/louisville/free_bikes
 Miami,miami,Bird,bird,https://mds.bird.co/gbfs/miami/free_bikes
 Nashville,nashville,Bird,bird,https://mds.bird.co/gbfs/nashville/free_bikes
 New York City,new_york,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/new_york/free_bike_status.json
-New York City,new_york,JUMP,jump,https://gbfs.uber.com/v1/nycb/gbfs.json
+New York City,new_york,JUMP,jump,https://gbfs.uber.com/v1/nycb/free_bike_status.json
 Portland,portland,Bird,bird,https://mds.bird.co/gbfs/portland/free_bikes
 Providence,providence,JUMP,jump,https://pvd.jumpbikes.com/opendata/free_bike_status.json
-Sacramento,sacramento,JUMP,jump,https://gbfs.uber.com/v1/sacb/gbfs.json
-Sacramento,sacramento,JUMP,jump,https://gbfs.uber.com/v1/sacs/gbfs.json
+Sacramento,sacramento,JUMP,jump,https://gbfs.uber.com/v1/sacb/free_bike_status.json
+Sacramento,sacramento,JUMP,jump,https://gbfs.uber.com/v1/sacs/free_bike_status.json
 Salt Lake City,salt_lake_city,Bird,bird,https://mds.bird.co/gbfs/salt-lake-city/free_bikes
 San Antonio,san_antonio,Bird,bird,https://mds.bird.co/gbfs/san-antonio/free_bikes
-San Diego,san_diego,JUMP,jump,https://gbfs.uber.com/v1/sdb/gbfs.json
-San Diego,san_diego,JUMP,jump,https://gbfs.uber.com/v1/sds/gbfs.json
-San Francisco,san_francisco,JUMP,jump,https://gbfs.uber.com/v1/sfb/gbfs.json
-San Francisco,san_francisco,JUMP,jump,https://gbfs.uber.com/v1/sfs/gbfs.json
+San Diego,san_diego,JUMP,jump,https://gbfs.uber.com/v1/sdb/free_bike_status.json
+San Diego,san_diego,JUMP,jump,https://gbfs.uber.com/v1/sds/free_bike_status.json
+San Francisco,san_francisco,JUMP,jump,https://gbfs.uber.com/v1/sfb/free_bike_status.json
+San Francisco,san_francisco,JUMP,jump,https://gbfs.uber.com/v1/sfs/free_bike_status.json
 Santa Barbara (UCSB),ucsb,HOPR,cyclehop,https://gbfs.hopr.city/api/gbfs/5/free_bike_status
-Santa Cruz,santa_cruz,JUMP,jump,https://gbfs.uber.com/v1/scb/gbfs.json
-Seattle,seattle,JUMP,jump,https://gbfs.uber.com/v1/seab/gbfs.json
-Tampa,tampa,JUMP,jump,https://gbfs.uber.com/v1/tpas/gbfs.json
+Santa Cruz,santa_cruz,JUMP,jump,https://gbfs.uber.com/v1/scb/free_bike_status.json
+Seattle,seattle,JUMP,jump,https://gbfs.uber.com/v1/seab/free_bike_status.json
+Tampa,tampa,JUMP,jump,https://gbfs.uber.com/v1/tpas/free_bike_status.json
 Tempe,tempe,Bird,bird,https://mds.bird.co/gbfs/tempe/free_bikes
 Washington DC,washington_dc,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/washington_dc/free_bike_status.json
 Washington DC,washington_dc,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/arlington/free_bike_status.json
-Washington DC,washington_dc,JUMP,jump,https://gbfs.uber.com/v1/dcs/gbfs.json
-Washington DC,washington_dc,JUMP,jump,https://gbfs.uber.com/v1/dcb/gbfs.json
+Washington DC,washington_dc,JUMP,jump,https://gbfs.uber.com/v1/dcs/free_bike_status.json
+Washington DC,washington_dc,JUMP,jump,https://gbfs.uber.com/v1/dcb/free_bike_status.json
 Washington DC,washington_dc,Spin,spin,https://web.spin.pm/api/gbfs/v1/washington_dc/free_bike_status
 Washington DC,washington_dc,Bird,bird,https://gbfs.bird.co/dc
 Washington DC,washington_dc,Lyft,lyft,https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/dca/free_bike_status.json
