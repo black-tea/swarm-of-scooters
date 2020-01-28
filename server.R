@@ -83,7 +83,7 @@ callAPI <- function (url) {
   print(sprintf("Calling API for %s",url))
   r <- GET(url)
   df <- jsonlite::fromJSON(content(r, as='text', encoding = "UTF-8"), flatten=TRUE)
-  rdf <- df$data$bikes
+  rdf <- df$data$bikes %>% mutate(lon = as.double(lon), lat = as.double(lat))
   
   # Support for non-standard format (skip)
   if(is.null(rdf))
