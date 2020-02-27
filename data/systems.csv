@@ -9,6 +9,7 @@ Baltimore,baltimore,JUMP,jump,https://gbfs.uber.com/v1/balts/free_bike_status.js
 Charlotte,charlotte,Bird,bird,https://mds.bird.co/gbfs/charlotte/free_bikes
 Chicago,chicago,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/chicago/free_bike_status.json
 Chicago,chicago,JUMP,jump,http://chi.jumpbikes.com/opendata/free_bike_status.json
+Chicago,chicago,Bird,bird,https://mds.bird.co/gbfs/chicago/gbfs.json
 Dallas,dallas,Bird,bird,https://mds.bird.co/gbfs/dallas/free_bikes
 Denver,denver,JUMP,jump,https://gbfs.uber.com/v1/denb/free_bike_status.json
 Denver,denver,Bird,bird,https://mds.bird.co/gbfs/denver/free_bikes
