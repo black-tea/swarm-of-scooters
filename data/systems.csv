@@ -29,9 +29,11 @@ Louisville,louisville,Bird,bird,https://mds.bird.co/gbfs/louisville/free_bikes
 Miami,miami,Bird,bird,https://mds.bird.co/gbfs/miami/free_bikes
 Miami,miami,Lyft,lyft,https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/mia/free_bike_status.json
 Miami,miami,Helbiz,helbiz,https://s3.amazonaws.com/lyft-lastmile-production-iad/lbs/mia/free_bike_status.json
-Miami,miami,HOPR,cyclehop,https://gbfs.hopr.city/api/gbfs/11/free_bike_status
+Miami,miami,Wheels,wheels,https://mia-gbfs.getwheelsapp.com/free_bike_status.json
+Miami,miami,Bolt,bolt,https://api-lb.micromobility.com/mia/gbfs/en/free_bike_status.json
 Miami,miami,Spin,spin,https://gbfs.spin.pm/api/gbfs/v1/miami/free_bike_status
 Miami,miami,Lime,lime,https://mia-gbfs.getwheelsapp.com/free_bike_status.json
+Miami,miami,HOPR,cyclehop,https://gbfs.hopr.city/api/gbfs/11/free_bike_status
 Nashville,nashville,Bird,bird,https://mds.bird.co/gbfs/nashville/free_bikes
 New York City,new_york,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/new_york/free_bike_status.json
 New York City,new_york,JUMP,jump,https://gbfs.uber.com/v1/nycb/free_bike_status.json

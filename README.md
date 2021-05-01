@@ -60,3 +60,6 @@ Zooming out on the map will triggers neighborhood polygon overlays with devices 
 [wheels]: www/wheels_circle.png
 
 [screenshot]: www/screenshot.PNG
+
+### Forking
+[Kevin Amézaga](https://mostlikelykevin.com){:target="_blank" rel="noopener"} forked this project to add Miami's scooter vendors as a part of the [Miami Riders Alliance's](https://riders.miami){:target="_blank" rel="noopener"} campaign, the [Mobile Miami Coalition](https://coalition.miami){:target="_blank" rel="noopener"}
