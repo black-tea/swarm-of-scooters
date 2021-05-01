@@ -121,8 +121,8 @@ filterBikes <- function(bikes, providers, devicetypes){
 
 ### Load Data
 # Get systems list from GitHub
-systems <- read_csv('https://raw.githubusercontent.com/black-tea/scooties/master/data/systems.csv')
-providerColors <- read_csv('https://raw.githubusercontent.com/black-tea/scooties/master/data/provider_colors.csv')
+systems <- read_csv('https://raw.githubusercontent.com/kevinamezaga/swarm-of-scooters/master/data/systems.csv')
+providerColors <- read_csv('https://github.com/kevinamezaga/swarm-of-scooters/blob/master/data/provider_colors.csv')
 
 # Select providers from systems list
 providerlist <- systems %>%

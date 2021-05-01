@@ -6,8 +6,8 @@ library(leaflet)
 library(shinydashboard)
 
 # Setup
-providerNames <- c('Bird','HOPR','JUMP','Lime','Lyft','Razor','Helbiz','Spin','Wheels')
-providerValues <- c('bird','hopr','jump','lime','lyft','razor','helbiz','spin','wheels')
+providerNames <- c('Bird','Bolt','HOPR','Lime','Lyft','Razor','Helbiz','Spin','Wheels')
+providerValues <- c('bird','bolt','hopr','lime','lyft','razor','helbiz','spin','wheels')
 providerHTML <- lapply(1:length(providerNames), function(x){
   lblHTML <- '<img src="%s_circle.png" height="12" width="12" style="margin: 0px 4px 2px 0px">%s'
   return(HTML(sprintf(lblHTML, providerValues[x], providerNames[x])))})
