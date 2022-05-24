@@ -17,6 +17,8 @@ Detroit,detroit,Spin,spin,https://web.spin.pm/api/gbfs/v1/detroit/free_bike_stat
 Detroit,detroit,Lime,lime,https://data.lime.bike/api/partners/v1/gbfs/detroit/free_bike_status.json
 Detroit,detroit,Bird,bird,https://mds.bird.co/gbfs/detroit/free_bikes
 Fort Lauderdale,fort_lauderdale,Bird,bird,https://mds.bird.co/gbfs/fort-lauderdale/free_bikes
+Kansas City,kansas_city,Bird,bird,https://mds.bird.co/gbfs/kansas-city/free_bike_status.json
+Kansas City,kansas_city,Spin,spin,https://gbfs.spin.pm/api/gbfs/v1/kansas_city/free_bike_status
 Los Angeles Region,la_region,Spin,spin,https://web.spin.pm/api/gbfs/v1/los_angeles/free_bike_status.json
 Los Angeles Region,la_region,Bird,bird,https://mds.bird.co/gbfs/santamonica/free_bikes
 Los Angeles Region,la_region,Bird,bird,https://mds.bird.co/gbfs/los-angeles/free_bikes
